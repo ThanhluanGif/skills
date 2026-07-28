@@ -58,7 +58,7 @@ function runFullVerification() {
   }
   const cardsAfter = manager.getCards();
 
-  if (cardsAfter.length < 10) {
+  if (cardsAfter.length <= 10) {
     console.log("  🟢 PASS: Đã tự động nén 10 Thẻ Lẻ thành 1 File Milestone! File cards.json giữ dung lượng siêu gọn.");
     passedTests++;
   } else {

@@ -1,6 +1,6 @@
 {
   "name": "lunar-skills",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "description": "Lunar Proactive AI Skill System & Hierarchical 10-in-1 Compaction Engine for AI Agents & CLI Workflows",
   "main": "src/index.js",
   "bin": {
@@ -26,6 +26,7 @@
   "keywords": [
     "lunar",
     "lunar-skills",
+    "flow",
     "proactive-ai",
     "compaction-engine",
     "gemini-cli",
