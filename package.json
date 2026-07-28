@@ -1,10 +1,10 @@
 {
   "name": "thanhluangit-skills",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Proactive AI Skill System & Hierarchical 10-in-1 Compaction Engine for AI Agents & CLI Workflows",
   "main": "src/index.js",
   "bin": {
-    "thanhluangit-skills": "src/index.js",
+    "thanhluangit-skills": "bin/cli.js",
     "agy-verify": "scripts/verify-system.js"
   },
   "repository": {
@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/ThanhluanGif/skills#readme",
   "scripts": {
+    "postinstall": "node scripts/install-skills.js",
     "start": "node src/index.js",
     "dev": "node src/index.js",
     "test": "node scripts/verify-system.js",
@@ -31,6 +32,6 @@
     "scope-guard",
     "vibe-coding"
   ],
-  "author": "ThanhluanGif",
+  "author": "Thanh Luan Gif (ThanhluanGif)",
   "license": "ISC"
 }
