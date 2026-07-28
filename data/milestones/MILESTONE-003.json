@@ -1,0 +1,105 @@
+{
+  "milestoneId": "MILESTONE-003",
+  "compactedAt": "2026-07-28T09:26:40.333Z",
+  "totalCardsCompacted": 10,
+  "scopesIncluded": [
+    null,
+    "SCOPE_DIAGRAM",
+    "SCOPE_CORE_ENGINE"
+  ],
+  "summary": "Hồ sơ nén 10 thẻ công việc từ CARD-021 đến CARD-010",
+  "cards": [
+    {
+      "id": "CARD-021",
+      "prompt": "Nghiệp vụ kiểm thử nén số 7",
+      "title": "Task: Nghiệp vụ kiểm thử nén số 7...",
+      "status": "DONE",
+      "createdAt": "2026-07-28T09:15:30.192Z",
+      "completedAt": "2026-07-28T09:15:30.192Z"
+    },
+    {
+      "id": "CARD-022",
+      "prompt": "Nghiệp vụ kiểm thử nén số 8",
+      "title": "Task: Nghiệp vụ kiểm thử nén số 8...",
+      "status": "DONE",
+      "createdAt": "2026-07-28T09:15:30.192Z",
+      "completedAt": "2026-07-28T09:15:30.192Z"
+    },
+    {
+      "id": "CARD-023",
+      "prompt": "Nghiệp vụ kiểm thử nén số 9",
+      "title": "Task: Nghiệp vụ kiểm thử nén số 9...",
+      "status": "DONE",
+      "createdAt": "2026-07-28T09:15:30.192Z",
+      "completedAt": "2026-07-28T09:15:30.193Z"
+    },
+    {
+      "id": "CARD-024",
+      "prompt": "Nghiệp vụ kiểm thử nén số 10",
+      "title": "Task: Nghiệp vụ kiểm thử nén số 10...",
+      "status": "DONE",
+      "createdAt": "2026-07-28T09:15:30.193Z",
+      "completedAt": "2026-07-28T09:26:40.326Z"
+    },
+    {
+      "id": "CARD-025",
+      "prompt": "Vẽ lại sơ đồ kiến trúc hệ thống",
+      "title": "Task: Vẽ lại sơ đồ kiến trúc hệ thống...",
+      "scope": "SCOPE_DIAGRAM",
+      "category": "Nghiệp vụ mới",
+      "status": "DONE",
+      "createdAt": "2026-07-28T09:26:40.327Z",
+      "completedAt": "2026-07-28T09:26:40.330Z"
+    },
+    {
+      "id": "CARD-016",
+      "prompt": "Nghiệp vụ kiểm thử nén số 1",
+      "title": "Task: Nghiệp vụ kiểm thử nén số 1...",
+      "scope": "SCOPE_CORE_ENGINE",
+      "category": "Nghiệp vụ mới",
+      "status": "DONE",
+      "createdAt": "2026-07-28T09:26:40.330Z",
+      "completedAt": "2026-07-28T09:26:40.331Z"
+    },
+    {
+      "id": "CARD-007",
+      "prompt": "Nghiệp vụ kiểm thử nén số 2",
+      "title": "Task: Nghiệp vụ kiểm thử nén số 2...",
+      "scope": "SCOPE_CORE_ENGINE",
+      "category": "Nghiệp vụ mới",
+      "status": "DONE",
+      "createdAt": "2026-07-28T09:26:40.331Z",
+      "completedAt": "2026-07-28T09:26:40.332Z"
+    },
+    {
+      "id": "CARD-008",
+      "prompt": "Nghiệp vụ kiểm thử nén số 3",
+      "title": "Task: Nghiệp vụ kiểm thử nén số 3...",
+      "scope": "SCOPE_CORE_ENGINE",
+      "category": "Nghiệp vụ mới",
+      "status": "DONE",
+      "createdAt": "2026-07-28T09:26:40.332Z",
+      "completedAt": "2026-07-28T09:26:40.332Z"
+    },
+    {
+      "id": "CARD-009",
+      "prompt": "Nghiệp vụ kiểm thử nén số 4",
+      "title": "Task: Nghiệp vụ kiểm thử nén số 4...",
+      "scope": "SCOPE_CORE_ENGINE",
+      "category": "Nghiệp vụ mới",
+      "status": "DONE",
+      "createdAt": "2026-07-28T09:26:40.332Z",
+      "completedAt": "2026-07-28T09:26:40.332Z"
+    },
+    {
+      "id": "CARD-010",
+      "prompt": "Nghiệp vụ kiểm thử nén số 5",
+      "title": "Task: Nghiệp vụ kiểm thử nén số 5...",
+      "scope": "SCOPE_CORE_ENGINE",
+      "category": "Nghiệp vụ mới",
+      "status": "DONE",
+      "createdAt": "2026-07-28T09:26:40.332Z",
+      "completedAt": "2026-07-28T09:26:40.333Z"
+    }
+  ]
+}

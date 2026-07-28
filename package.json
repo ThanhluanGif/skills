@@ -1,0 +1,22 @@
+{
+  "name": "agy-master-agency-skills",
+  "version": "1.0.0",
+  "description": "AGY Virtual Agency Proactive Skill System & Compaction Engine",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node src/index.js",
+    "test": "node scripts/verify-system.js",
+    "verify": "node scripts/verify-system.js",
+    "cards": "node scripts/card-manager.js"
+  },
+  "keywords": [
+    "agy",
+    "skills",
+    "proactive-ai",
+    "compaction-engine",
+    "vibe-coding"
+  ],
+  "author": "AGY Principal AI Solution Architect",
+  "license": "ISC"
+}

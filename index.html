@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENTERPRISE SYSTEM ARCHITECTURE & DOCUMENTATION DASHBOARD</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;900&family=Plus+Jakarta+Sans:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Mermaid.js v10 CDN for Rendering All 18 Architectural Diagrams -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#080c18',
+        primaryColor: '#00ff66',
+        primaryTextColor: '#ffffff',
+        primaryBorderColor: '#00ff66',
+        lineColor: '#00f0ff',
+        secondaryColor: '#162036',
+        tertiaryColor: '#0e1424'
+      }
+    });
+  </script>
+
+  <style>
+    :root {
+      --bg-dark: #050811;
+      --bg-card: #0e1424;
+      --accent-neon: #00ff66;
+      --accent-cyan: #00f0ff;
+      --accent-magenta: #ff0055;
+      --text-main: #ffffff;
+      --text-muted: #94a3b8;
+      --border-sharp: 1px solid rgba(0, 255, 102, 0.25);
+      --font-mono: 'Space Grotesk', monospace;
+      --font-title: 'Outfit', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    .header-dashboard {
+      max-width: 1440px;
+      margin: 0 auto 2rem auto;
+      border-bottom: var(--border-sharp);
+      padding-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .header-dashboard h1 {
+      font-family: var(--font-title);
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .header-dashboard h1 span { color: var(--accent-neon); }
+
+    .tag-badge {
+      font-family: var(--font-mono);
+      background: rgba(0, 255, 102, 0.15);
+      color: var(--accent-neon);
+      border: 1px solid var(--accent-neon);
+      padding: 4px 12px;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    /* Navigation Tabs Bar */
+    .tab-bar {
+      max-width: 1440px;
+      margin: 0 auto 2rem auto;
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: var(--bg-card);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      padding: 0.6rem 1.4rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      background: rgba(0, 255, 102, 0.1);
+      color: var(--accent-neon);
+      border-color: var(--accent-neon);
+    }
+
+    .tab-content {
+      display: none;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(680px, 1fr));
+      gap: 2rem;
+    }
+
+    .doc-card {
+      background: var(--bg-card);
+      border: var(--border-sharp);
+      padding: 1.8rem;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .doc-title {
+      font-family: var(--font-mono);
+      font-size: 1.05rem;
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 0.6rem;
+    }
+
+    .doc-link {
+      font-size: 0.75rem;
+      color: var(--accent-neon);
+      text-decoration: none;
+      border: 1px solid var(--accent-neon);
+      padding: 2px 8px;
+    }
+
+    .mermaid-box {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #080c18;
+      border: 1px dashed rgba(0, 255, 102, 0.2);
+      padding: 1.5rem;
+      overflow: auto;
+      min-height: 280px;
+    }
+
+    /* Quick Specs Table */
+    .table-sharp {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      margin-top: 1rem;
+    }
+
+    .table-sharp th, .table-sharp td {
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      text-align: left;
+    }
+
+    .table-sharp th {
+      background: #060a14;
+      color: var(--accent-neon);
+    }
+
+    footer {
+      max-width: 1440px;
+      margin: 3rem auto 0 auto;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header-dashboard">
+    <div>
+      <span class="tag-badge">ENTERPRISE TECHNICAL SPECIFICATION SUITE</span>
+      <h1>MASTER ARCHITECTURE INDEX <span>DASHBOARD</span></h1>
+    </div>
+    <div style="font-family: var(--font-mono); color: var(--text-muted); font-size: 0.85rem;">
+      DOCS INDEX: <span style="color: var(--accent-neon);">18 MANDATORY SECTIONS GENERATED</span>
+    </div>
+  </header>
+
+  <!-- Interactive Navigation Tabs -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchTab('tab-arch')">🏗 1. Kiến Trúc & Module</button>
+    <button class="tab-btn" onclick="switchTab('tab-data')">🗄 2. Dữ Liệu & API Flow</button>
+    <button class="tab-btn" onclick="switchTab('tab-workflow')">🔄 3. Sơ Đồ Tuần Tự Workflow</button>
+    <button class="tab-btn" onclick="switchTab('tab-security')">🛡 4. Bảo Mật & ADR Decisions</button>
+  </div>
+
+  <!-- TAB 1: KIẾN TRÚC & MODULE -->
+  <div id="tab-arch" class="tab-content active">
+    <div class="grid-container">
+      
+      <!-- System Architecture Graph -->
+      <div class="doc-card">
+        <div class="doc-title">
+          <span>🏗 SYSTEM ARCHITECTURE (system-architecture.md)</span>
+          <a href="docs/architecture/system-architecture.md" class="doc-link">DOC MD ↗</a>
+        </div>
+        <div class="mermaid-box">
+          <pre class="mermaid">
+graph TD
+    User["👤 User / Terminal Prompt"] --> APIServer["Native HTTP Server (src/index.js:3000)"]
+    APIServer --> CardManager["Card Manager Engine (scripts/card-manager.js)"]
+    CardManager --> ScopeGuard["Scope Enforcer Guard (scripts/scope-enforcer.js)"]
+    
+    subgraph Storage_Tier ["3-Tier File Persistence"]
+        CardManager --> Level0["Level 0: cards.json (< 10 Active)"]
+        Level0 -->|10-in-1 Compaction| Level1["Level 1: data/milestones/MILESTONE-001.json"]
+        Level1 -->|100-in-1 Compaction| Level2["Level 2: data/reports/MASTER_REPORT_001.md"]
+    end
+          </pre>
+        </div>
+      </div>
+
+      <!-- Folder Structure & Packages -->
+      <div class="doc-card">
+        <div class="doc-title">
+          <span>🌳 FOLDER STRUCTURE & PACKAGES (folder-structure.md)</span>
+          <a href="docs/architecture/folder-structure.md" class="doc-link">DOC MD ↗</a>
+        </div>
+        <div class="mermaid-box">
+          <pre class="mermaid">
+graph TD
+    Root["/ (Root Project)"] --> Gemini[".gemini/skills/ (AI Skills)"]
+    Root --> Data["data/ (JSON & Markdown Storage)"]
+    Root --> Scripts["scripts/ (Engine & Scope Guard)"]
+    Root --> Src["src/ (Native HTTP Server)"]
+    Root --> Docs["docs/ (Architectural Specs)"]
+
+    Scripts --> CardMgr["card-manager.js"]
+    Scripts --> ScopeEnf["scope-enforcer.js"]
+    Src --> IndexJS["index.js"]
+          </pre>
+        </div>
+      </div>
+
+      <!-- Package Architecture -->
+      <div class="doc-card">
+        <div class="doc-title">
+          <span>📦 PACKAGE ARCHITECTURE (package-diagram.md)</span>
+          <a href="docs/architecture/package-diagram.md" class="doc-link">DOC MD ↗</a>
+        </div>
+        <div class="mermaid-box">
+          <pre class="mermaid">
+graph TD
+    Client["Client / User / Terminal"] -->|HTTP / CLI| Controller["Controller (src/index.js)"]
+    Controller -->|Delegates Logic| Service["Service Engine (scripts/card-manager.js)"]
+    Service -->|Validates Scope| Guard["Scope Guard (scripts/scope-enforcer.js)"]
+    Service -->|Persists Data| Storage["Storage Layer (data/cards.json)"]
+          </pre>
+        </div>
+      </div>
+
+      <!-- Feature Tree -->
+      <div class="doc-card">
+        <div class="doc-title">
+          <span>🌲 FEATURE TREE (feature-tree.md)</span>
+          <a href="docs/architecture/feature-tree.md" class="doc-link">DOC MD ↗</a>
+        </div>
+        <div class="mermaid-box">
+          <pre class="mermaid">
+graph TD
+    Root["PROACTIVE AI SKILL SYSTEM"] --> F1["Card Management"]
+    Root --> F2["Scope Boundary Guard"]
+    Root --> F3["Hierarchical Compaction"]
+    Root --> F4["Visual System Diagrammer"]
+
+    F1 --> F1_1["Auto-Create Card"]
+    F2 --> F2_1["Scope Rule Matrix"]
+    F3 --> F3_1["10-in-1 Milestone Nén"]
+    F4 --> F4_1["Mermaid Graph index.html"]
+          </pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB 2: DỮ LIỆU & API FLOW -->
+  <div id="tab-data" class="tab-content">
+    <div class="grid-container">
+      
+      <!-- Database ERD -->
+      <div class="doc-card">
+        <div class="doc-title">
+          <span>🗄 DATABASE SCHEMA ERD (database.md)</span>
+          <a href="docs/database/database.md" class="doc-link">DOC MD ↗</a>
+        </div>
+        <div class="mermaid-box">
+          <pre class="mermaid">
+erDiagram
+    CARD {
+        string id PK
+        string prompt
+        string scope FK
+        string status
+        string createdAt
+    }
+    MILESTONE {
+        string milestoneId PK
+        int totalCardsCompacted
+    }
+    MASTER_REPORT {
+        string reportId PK
+    }
+    CARD ||--o{ MILESTONE : "10 cards -> 1 milestone"
+    MILESTONE ||--o{ MASTER_REPORT : "10 milestones -> 1 report"
+          </pre>
+        </div>
+      </div>
+
+      <!-- Data Flow -->
+      <div class="doc-card">
+        <div class="doc-title">
+          <span>🌊 END-TO-END DATA FLOW (data-flow.md)</span>
+          <a href="docs/api/data-flow.md" class="doc-link">DOC MD ↗</a>
+        </div>
+        <div class="mermaid-box">
+          <pre class="mermaid">
+graph TD
+    UserPrompt["1. User Prompt"] --> API["2. API Server (src/index.js)"]
+    API --> CardMgr["3. Card Manager"]
+    CardMgr --> ScopeGuard["4. Scope Enforcer"]
+    ScopeGuard --> Level0["5. cards.json (Level 0)"]
+    Level0 --> Compactor["6. Compaction Engine"]
+    Compactor --> Level1["7. MILESTONE-xxx.json (Level 1)"]
+    Level1 --> Level2["8. MASTER_REPORT-xxx.md (Level 2)"]
+          </pre>
+        </div>
+      </div>
+
+      <!-- API Architecture -->
+      <div class="doc-card" style="grid-column: 1 / -1;">
+        <div class="doc-title">
+          <span>🌐 API ENDPOINTS SPECIFICATION (api-architecture.md)</span>
+          <a href="docs/api/api-architecture.md" class="doc-link">DOC MD ↗</a>
+        </div>
+        <table class="table-sharp">
+          <thead>
+            <tr>
+              <th>METHOD</th>
+              <th>ENDPOINT</th>
+              <th>DESCRIPTION</th>
+              <th>PAYLOAD / RESPONSE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span style="color:var(--accent-neon);">GET</span></td>
+              <td><code>/api/health</code></td>
+              <td>Healthcheck uptime probe</td>
+              <td><code>{ status: "UP", timestamp: "..." }</code></td>
+            </tr>
+            <tr>
+              <td><span style="color:var(--accent-neon);">GET</span></td>
+              <td><code>/api/cards</code></td>
+              <td>Get active task cards array</td>
+              <td><code>{ status: "SUCCESS", cards: [...] }</code></td>
+            </tr>
+            <tr>
+              <td><span style="color:var(--accent-cyan);">POST</span></td>
+              <td><code>/api/cards</code></td>
+              <td>Create new task card from prompt</td>
+              <td><code>{ prompt: "...", category: "..." }</code></td>
+            </tr>
+            <tr>
+              <td><span style="color:var(--accent-neon);">GET</span></td>
+              <td><code>/index.html</code></td>
+              <td>Serve Visual Architecture Dashboard</td>
+              <td><code>HTML5 Static Dashboard</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB 3: SƠ ĐỒ TUẦN TỰ WORKFLOW -->
+  <div id="tab-workflow" class="tab-content">
+    <div class="grid-container">
+      
+      <!-- Sequence: Card Creation -->
+      <div class="doc-card">
+        <div class="doc-title">
+          <span>🔄 CARD CREATION SEQUENCE (sequence-card-creation.md)</span>
+          <a href="docs/workflow/sequence-card-creation.md" class="doc-link">DOC MD ↗</a>
+        </div>
+        <div class="mermaid-box">
+          <pre class="mermaid">
+sequenceDiagram
+    actor User as User / Terminal
+    participant Server as src/index.js
+    participant Engine as card-manager.js
+    participant Guard as scope-enforcer.js
+    participant Storage as data/cards.json
+
+    User->>Server: POST /api/cards
+    Server->>Engine: processUserPrompt()
+    Engine->>Engine: detectScopeFromPrompt()
+    Engine->>Guard: validateAction()
+    Guard-->>Engine: SCOPE_PASSED
+    Engine->>Storage: Save Card IN_PROGRESS
+    Engine-->>Server: Return Card
+    Server-->>User: 201 Created
+          </pre>
+        </div>
+      </div>
+
+      <!-- Sequence: Scope Validation -->
+      <div class="doc-card">
+        <div class="doc-title">
+          <span>🛡 SCOPE VALIDATION SEQUENCE (sequence-scope-validation.md)</span>
+          <a href="docs/workflow/sequence-scope-validation.md" class="doc-link">DOC MD ↗</a>
+        </div>
+        <div class="mermaid-box">
+          <pre class="mermaid">
+sequenceDiagram
+    actor Subagent as AI Subagent
+    participant Engine as card-manager.js
+    participant Guard as scope-enforcer.js
+
+    Subagent->>Engine: modifyFileWithScopeCheck("payment.js")
+    Engine->>Guard: validateAction("SCOPE_DIAGRAM", "payment.js")
+    Guard-->>Engine: SCOPE_VIOLATION_BLOCKED
+    Engine-->>Subagent: BLOCK ACTION & Log Exception ⛔
+          </pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TAB 4: BẢO MẬT & ADR DECISIONS -->
+  <div id="tab-security" class="tab-content">
+    <div class="grid-container">
+      
+      <!-- Security Architecture -->
+      <div class="doc-card">
+        <div class="doc-title">
+          <span>🛡 SECURITY ARCHITECTURE (security.md)</span>
+          <a href="docs/security/security.md" class="doc-link">DOC MD ↗</a>
+        </div>
+        <div class="mermaid-box">
+          <pre class="mermaid">
+graph TD
+    UserAction["User / AI Action Request"] --> ScopeGuard["scope-enforcer.js"]
+    ScopeGuard --> PathCheck{"File in Scope Allowed Paths?"}
+    PathCheck -->|No| Blocked["SCOPE_VIOLATION_BLOCKED ⛔"]
+    PathCheck -->|Yes| TraversalCheck{"Path Traversal Safe?"}
+    TraversalCheck -->|Yes| Allowed["SCOPE_PASSED ✅"]
+          </pre>
+        </div>
+      </div>
+
+      <!-- Architecture Decision Records (ADRs) -->
+      <div class="doc-card">
+        <div class="doc-title">
+          <span>📜 ARCHITECTURE DECISION RECORDS (ADR-001 & ADR-002)</span>
+          <a href="docs/adr/ADR-001.md" class="doc-link">ADR-001 ↗</a>
+          <a href="docs/adr/ADR-002.md" class="doc-link">ADR-002 ↗</a>
+        </div>
+        <table class="table-sharp">
+          <thead>
+            <tr>
+              <th>ADR ID</th>
+              <th>DECISION TITLE</th>
+              <th>STATUS</th>
+              <th>REASON / BENEFIT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>ADR-001</strong></td>
+              <td>Loại bỏ Docker & SQL chọn Nén Thẻ Phân Cấp 3 Tầng</td>
+              <td><span style="color:var(--accent-neon);">APPROVED</span></td>
+              <td>Giúp bộ Skill siêu nhẹ 100%, 0 dependency, không tốn tài nguyên server.</td>
+            </tr>
+            <tr>
+              <td><strong>ADR-002</strong></td>
+              <td>Khóa Ranh Giới Scope (Strict Scope Enforcer Guard)</td>
+              <td><span style="color:var(--accent-neon);">APPROVED</span></td>
+              <td>Chống AI lan man, bảo vệ Token Budget và ngăn đè hỏng code khác scope.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    MASTER SYSTEM ARCHITECTURE VISUAL INDEX DASHBOARD // GENERATED IN INDEX.HTML
+  </footer>
+
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      
+      event.target.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+  </script>
+</body>
+</html>
