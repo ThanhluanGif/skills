@@ -1,10 +1,10 @@
 {
-  "name": "thanhlungif-skills",
+  "name": "thanhluangif-skills",
   "version": "1.0.0",
   "description": "Proactive AI Skill System & Hierarchical 10-in-1 Compaction Engine for AI Agents & CLI Workflows",
   "main": "src/index.js",
   "bin": {
-    "thanhlungif-skills": "src/index.js",
+    "thanhluangif-skills": "src/index.js",
     "agy-verify": "scripts/verify-system.js"
   },
   "repository": {
