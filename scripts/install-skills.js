@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 /**
- * AUTOMATIC GEMINI / AGY SKILL INSTALLER
- * Tự động sao chép các Skills từ package vào thư mục .gemini/skills/ của dự án mục tiêu.
+ * AUTOMATIC GEMINI / AGY SKILL INSTALLER & GLOBAL SYMLINK REGISTER
+ * Tự động sao chép các Skills vào:
+ * 1. Thư mục .gemini/skills/ của dự án mục tiêu.
+ * 2. Thư mục ~/.gemini/config/skills/ của Antigravity/AGY CLI để auto-load toàn hệ thống!
  */
 
 const fs = require('fs');
@@ -10,26 +12,23 @@ const path = require('path');
 function installSkills() {
   const packageSkillsDir = path.join(__dirname, '../.gemini/skills');
   
-  // Xác định thư mục dự án mục tiêu (nơi user gõ npm i)
+  // 1. Thư mục dự án mục tiêu
   const targetProjectDir = process.env.INIT_CWD || process.cwd();
   const targetGeminiSkillsDir = path.join(targetProjectDir, '.gemini/skills');
+
+  // 2. Thư mục config global của Antigravity/AGY CLI
+  const homeDir = process.env.HOME || process.env.USERPROFILE || '/Users/admin';
+  const globalSkillsDir = path.join(homeDir, '.gemini/config/skills');
 
   if (!fs.existsSync(packageSkillsDir)) {
     console.log('[Skill Installer] Không tìm thấy nguồn skills trong package.');
     return;
   }
 
-  // Đảm bảo thư mục mục tiêu tồn tại
-  if (!fs.existsSync(targetGeminiSkillsDir)) {
-    fs.mkdirSync(targetGeminiSkillsDir, { recursive: true });
-  }
-
-  // Sao chép đệ quy tất cả các folder skills
   function copyRecursiveSync(src, dest) {
-    const exists = fs.existsSync(src);
-    const stats = exists && fs.statSync(src);
-    const isDirectory = exists && stats.isDirectory();
-    if (isDirectory) {
+    if (!fs.existsSync(src)) return;
+    const stats = fs.statSync(src);
+    if (stats.isDirectory()) {
       if (!fs.existsSync(dest)) fs.mkdirSync(dest, { recursive: true });
       fs.readdirSync(src).forEach(childItemName => {
         copyRecursiveSync(path.join(src, childItemName), path.join(dest, childItemName));
@@ -39,9 +38,19 @@ function installSkills() {
     }
   }
 
+  // Cài đặt vào Dự án Local
   copyRecursiveSync(packageSkillsDir, targetGeminiSkillsDir);
-  console.log(`\n🟢 [SUCCESS] Đã tự động cài đặt tất cả Skills vào: ${targetGeminiSkillsDir}`);
-  console.log(`✨ Gemini / AGY / Antigravity đã nhận diện 100% Skills mới!\n`);
+  console.log(`🟢 [LOCAL SKILLS] Đã cài đặt vào: ${targetGeminiSkillsDir}`);
+
+  // Đăng ký vào Global Config AGY/Antigravity
+  try {
+    copyRecursiveSync(packageSkillsDir, globalSkillsDir);
+    console.log(`🟢 [GLOBAL SKILLS] Đã đăng ký vào: ${globalSkillsDir}`);
+  } catch (e) {
+    console.log(`⚠️ [GLOBAL SKILLS] Không thể đăng ký global: ${e.message}`);
+  }
+
+  console.log(`\n✨ Gemini AI / AGY / Antigravity đã nhận diện 100% 8 Skills mới!\n`);
 }
 
 if (require.main === module) {

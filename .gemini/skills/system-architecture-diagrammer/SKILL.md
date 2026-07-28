@@ -1,19 +1,14 @@
 ---
 name: system-architecture-diagrammer
-description: SKILL CHUYÊN TRÁCH VẼ SƠ ĐỒ CẤU TRÚC HỆ THỐNG (SYSTEM ARCHITECTURE DIAGRAMMER). Tự động tạo và cập nhật sơ đồ kiến trúc C4, sơ đồ luồng dữ liệu, sơ đồ cây phụ thuộc component và render trực quan lên file index.html bằng Mermaid.js & SVG.
+description: Chuyên trách tạo và cập nhật sơ đồ kiến trúc hệ thống C4 Model, quy trình nén thẻ 10-in-1, và sơ đồ luồng dữ liệu bằng Mermaid.js xuất ra file docs/architecture.html.
 ---
 
 # SYSTEM ARCHITECTURE DIAGRAMMER SKILL
 
-Skill chuyên biệt đảm nhận việc mô phỏng, trực quan hóa và thiết kế các sơ đồ cấu trúc hệ thống phần mềm dưới dạng đồ thị tương tác.
+> **Nhiệm vụ**: Render đồ thị kiến trúc Mermaid.js trực tiếp vào **`docs/architecture.html`**, bảo vệ file `index.html` của dự án khỏi bị đè hay xung đột với React/Vite.
 
-## 🎨 CÁC NHIỆM VỤ CHÍNH
-
-1. **Vẽ Sơ Đồ Kiến Trúc C4 (System Context & Container Diagrams)**:
-   - Trực quan hóa mối quan hệ giữa Người dùng, AI Orchestrator, Card Manager, Compaction Engine và các Subagents.
-
-2. **Vẽ Sơ Đồ Luồng Dữ Liệu & Phạm Vi Scope (Data Flow & Scope Diagram)**:
-   - Mô phỏng cách dữ liệu di chuyển từ Prompt -> Thẻ Task (Scoped) -> Nén Milestone -> Báo cáo Macro.
-
-3. **Tự Động Xuất & Cập Nhật `index.html`**:
-   - Mọi sơ đồ được tự động render bằng **Mermaid.js** & HTML/CSS Sharp Layout, cho phép xem trực tiếp trên mọi trình duyệt mà không cần cài đặt phần mềm phụ trợ.
+## 📊 CÁC SƠ ĐỒ CHỦ YẾU
+1. **System Architecture Graph**: Sơ đồ C4 Model.
+2. **Hierarchical Compaction Flowchart**: Sơ đồ nén 10-in-1.
+3. **Multi-Tool Ecosystem**: Sơ đồ tư vấn công cụ đa dạng.
+4. **Target File**: Tất cả đồ thị render vào `docs/architecture.html`.

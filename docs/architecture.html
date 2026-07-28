@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOCS SYSTEM ARCHITECTURE & VISUAL DIAGRAMS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@700;900&family=Plus+Jakarta+Sans:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'dark',
+      themeVariables: {
+        darkMode: true,
+        background: '#080c18',
+        primaryColor: '#00ff66',
+        primaryTextColor: '#ffffff',
+        primaryBorderColor: '#00ff66',
+        lineColor: '#00f0ff',
+        secondaryColor: '#162036',
+        tertiaryColor: '#0e1424'
+      }
+    });
+  </script>
+
+  <style>
+    :root {
+      --bg-dark: #050811;
+      --bg-card: #0e1424;
+      --accent-neon: #00ff66;
+      --accent-cyan: #00f0ff;
+      --accent-magenta: #ff0055;
+      --text-main: #ffffff;
+      --text-muted: #94a3b8;
+      --border-sharp: 1px solid rgba(0, 255, 102, 0.25);
+      --font-mono: 'Space Grotesk', monospace;
+      --font-title: 'Outfit', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    .header-dashboard {
+      max-width: 1440px;
+      margin: 0 auto 2rem auto;
+      border-bottom: var(--border-sharp);
+      padding-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .header-dashboard h1 {
+      font-family: var(--font-title);
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .header-dashboard h1 span { color: var(--accent-neon); }
+
+    .tag-badge {
+      font-family: var(--font-mono);
+      background: rgba(0, 255, 102, 0.15);
+      color: var(--accent-neon);
+      border: 1px solid var(--accent-neon);
+      padding: 4px 12px;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(680px, 1fr));
+      gap: 2rem;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .doc-card {
+      background: var(--bg-card);
+      border: var(--border-sharp);
+      padding: 1.8rem;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .doc-title {
+      font-family: var(--font-mono);
+      font-size: 1.05rem;
+      color: var(--accent-cyan);
+      letter-spacing: 1px;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding-bottom: 0.6rem;
+    }
+
+    .mermaid-box {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #080c18;
+      border: 1px dashed rgba(0, 255, 102, 0.2);
+      padding: 1.5rem;
+      overflow: auto;
+      min-height: 280px;
+    }
+
+    footer {
+      max-width: 1440px;
+      margin: 3rem auto 0 auto;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding-top: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header-dashboard">
+    <div>
+      <span class="tag-badge">DOCS ISOLATED SYSTEM ARCHITECTURE</span>
+      <h1>SYSTEM ARCHITECTURE <span>VISUAL DIAGRAMS</span></h1>
+    </div>
+    <div style="font-family: var(--font-mono); color: var(--text-muted); font-size: 0.85rem;">
+      OUTPUT LOCATION: <span style="color: var(--accent-neon);">DOCS/ARCHITECTURE.HTML</span>
+    </div>
+  </header>
+
+  <div class="grid-container">
+    
+    <!-- System Architecture Graph -->
+    <div class="doc-card">
+      <div class="doc-title">
+        <span>🏗 SYSTEM ARCHITECTURE (docs/architecture.html)</span>
+      </div>
+      <div class="mermaid-box">
+        <pre class="mermaid">
+graph TD
+    User["👤 User / Terminal Prompt"] --> APIServer["Native HTTP Server (src/index.js:3000)"]
+    APIServer --> CardManager["Card Manager Engine (scripts/card-manager.js)"]
+    CardManager --> ScopeGuard["Scope Enforcer Guard (scripts/scope-enforcer.js)"]
+    
+    subgraph Storage_Tier ["3-Tier File Persistence"]
+        CardManager --> Level0["Level 0: cards.json (< 10 Active)"]
+        Level0 -->|10-in-1 Compaction| Level1["Level 1: data/milestones/MILESTONE-001.json"]
+        Level1 -->|100-in-1 Compaction| Level2["Level 2: data/reports/MASTER_REPORT_001.md"]
+    end
+        </pre>
+      </div>
+    </div>
+
+    <!-- Hierarchical Compaction Flowchart -->
+    <div class="doc-card">
+      <div class="doc-title">
+        <span>🗂 HIERARCHICAL COMPACTION FLOWCHART</span>
+      </div>
+      <div class="mermaid-box">
+        <pre class="mermaid">
+flowchart LR
+    RawCards["Tầng 0: 10 Thẻ Lẻ (cards.json)"] -->|Compaction Engine| Milestones["Tầng 1: MILESTONE-001.json"]
+    Milestones -->|Executive Summarizer| MasterReports["Tầng 2: MASTER_REPORT_001.md"]
+        </pre>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    DOCS ISOLATED ARCHITECTURE VISUALIZER // SAVED IN DOCS/ARCHITECTURE.HTML
+  </footer>
+</body>
+</html>
