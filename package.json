@@ -1,11 +1,11 @@
 {
-  "name": "thanhluangit-skills",
-  "version": "2.0.2",
-  "description": "Proactive AI Skill System & Hierarchical 10-in-1 Compaction Engine for AI Agents & CLI Workflows",
+  "name": "lunar-skills",
+  "version": "1.0.0",
+  "description": "Lunar Proactive AI Skill System & Hierarchical 10-in-1 Compaction Engine for AI Agents & CLI Workflows",
   "main": "src/index.js",
   "bin": {
-    "thanhluangit-skills": "bin/cli.js",
-    "agy-verify": "scripts/verify-system.js"
+    "lunar-skills": "bin/cli.js",
+    "lunar-verify": "scripts/verify-system.js"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,8 @@
     "cards": "node scripts/card-manager.js"
   },
   "keywords": [
-    "ai-skills",
+    "lunar",
+    "lunar-skills",
     "proactive-ai",
     "compaction-engine",
     "gemini-cli",
