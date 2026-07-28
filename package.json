@@ -1,6 +1,6 @@
 {
   "name": "thanhluangit-skills",
-  "version": "1.0.1",
+  "version": "2.0.1",
   "description": "Proactive AI Skill System & Hierarchical 10-in-1 Compaction Engine for AI Agents & CLI Workflows",
   "main": "src/index.js",
   "bin": {
