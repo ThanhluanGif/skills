@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  * SYSTEM AUTOMATED VERIFICATION ENGINE FOR VIBE CODERS
  * Chức năng:

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  * UNIVERSAL COMMUNITY AI SKILL SERVER & CARD MANAGER API
  */
